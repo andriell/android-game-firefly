@@ -3,8 +3,10 @@ package com.andriell.firefly;
 import android.content.pm.ActivityInfo;
 import android.view.View;
 
+import com.andriell.game.base.Animation;
 import com.andriell.game.base.DrawSprite;
 import com.andriell.game.base.GameActivity;
+import com.andriell.game.base.SpriteAnimation;
 import com.andriell.game.base.SpriteBitmap;
 import com.andriell.game.base.SpriteSheetBitmap;
 import com.andriell.game.base.SpriteSheetXBitmaps;
@@ -54,6 +56,14 @@ public class Level_1_Activity extends GameActivity {
         setPositionPBL(bg4, 0, 0);
         bg4.setSpeedX(yP(-0.01F));
         drawSprite.addSprite(0, bg4);
+
+        SpriteAnimation player = new SpriteAnimation(createAnimationP(new int[]{R.drawable.player1_1, R.drawable.player1_2}, new int[]{100,100}));
+        setPositionPTL(player, 0.5F, 0.1F);
+        drawSprite.addSprite(2, player);
+
+        SpriteAnimation monster = new SpriteAnimation(createAnimationP(new int[]{R.drawable.monster1_1, R.drawable.monster1_2}, new int[]{150,150}));
+        setPositionPTR(monster, 0.5F, 0.2F);
+        drawSprite.addSprite(2, monster);
 
         return drawSprite;
     }
