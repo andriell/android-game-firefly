@@ -1,13 +1,13 @@
 package com.andriell.firefly;
 
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.view.View;
 
 import com.andriell.game.base.DrawSprite;
 import com.andriell.game.base.GameActivity;
 import com.andriell.game.base.SpriteBitmap;
 import com.andriell.game.base.SpriteSheetBitmap;
+import com.andriell.game.base.SpriteSheetXBitmaps;
 
 /**
  * Created by Андрей on 25.12.2016.
@@ -39,6 +39,20 @@ public class Level_1_Activity extends GameActivity {
         setPositionPBL(bg2, 0, 0);
         bg2.setSpeedX(yP(-0.001F));
         drawSprite.addSprite(0, bg2);
+
+        SpriteSheetBitmap bg3 = new SpriteSheetBitmap();
+        bg3.setBitmap(createBitmapP(R.drawable.bg3_1));
+        setWidthP(bg3, 1F);
+        setPositionPBL(bg3, 0, 0);
+        bg3.setSpeedX(yP(-0.005F));
+        drawSprite.addSprite(0, bg3);
+
+        SpriteSheetXBitmaps bg4 = new SpriteSheetXBitmaps();
+        bg4.setBitmap(createBitmapArray(new int[]{R.drawable.bg4_1, R.drawable.bg4_2, R.drawable.bg4_3, R.drawable.bg4_4}));
+        setWidthP(bg4, 1F);
+        setPositionPBL(bg4, 0, 0);
+        bg4.setSpeedX(yP(-0.01F));
+        drawSprite.addSprite(0, bg4);
 
         return drawSprite;
     }

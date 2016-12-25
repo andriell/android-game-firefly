@@ -90,6 +90,14 @@ public abstract class GameActivity extends Activity {
     //</editor-fold>
 
     //<editor-fold desc="createBitmap">
+    public Bitmap[] createBitmapArray(int[] id) {
+        Bitmap[] r = new Bitmap[id.length];
+        for (int i = 0; i < id.length; i++) {
+            r[i] = createBitmapP(id[i], 0F, 0F);
+        }
+        return r;
+    }
+
     public Bitmap createBitmapP(int id) {
         return createBitmapP(id, 0F, 0F);
     }
