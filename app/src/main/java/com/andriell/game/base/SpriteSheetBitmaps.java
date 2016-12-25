@@ -1,16 +1,18 @@
 package com.andriell.game.base;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /**
  * Created by Андрей on 03.12.2016.
  */
 
-public class SpriteSheetBitmap extends SpriteBitmap implements InterfaceSpriteResize {
+public class SpriteSheetBitmaps extends SpritePositioned implements InterfaceSpriteResize {
+    protected Bitmap[] bitmap;
     private float speedX = 0F;
     private float speedY = 0F;
 
-    @Override
+    /*@Override
     public boolean onDraw(Canvas c) {
         if (bitmap == null) {
             return true;
@@ -35,7 +37,7 @@ public class SpriteSheetBitmap extends SpriteBitmap implements InterfaceSpriteRe
             c.drawBitmap(bitmap, left, y, null);
         }
         return true;
-    }
+    }*/
 
 
     @Override

@@ -32,7 +32,7 @@ public class SpriteBitmap extends SpritePositioned {
     @Override
     public float getWidth() {
         if (bitmap == null) {
-            return height;
+            return width;
         }
         return bitmap.getWidth();
     }

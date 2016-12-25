@@ -269,6 +269,14 @@ public abstract class GameActivity extends Activity {
     }
     //</editor-fold>
 
+    public void setWidthP(InterfaceSpriteResize resize, float width) {
+        resize.setWidth(displaySize.x * width);
+    }
+
+    public void setHeightP(InterfaceSpriteResize resize, float height) {
+        resize.setHeight(displaySize.y * height);
+    }
+
     public void setSizeP(InterfaceSpriteResize resize, float width, float height) {
         if (width > 0 && height > 0) {
             resize.setWidth(displaySize.x * width);
