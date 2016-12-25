@@ -40,10 +40,11 @@ public class Level_1_Activity extends GameActivity {
         bg2.setSpeedX(yP(-0.001F));
         drawSprite.addSprite(0, bg2);
 
-        SpriteSheetBitmap bg3 = new SpriteSheetBitmap();
-        bg3.setBitmap(createBitmapP(R.drawable.bg3_1));
+        SpriteSheetXBitmaps bg3 = new SpriteSheetXBitmaps();
+        bg3.setBitmap(createBitmapArray(new int[]{R.drawable.bg3_1, R.drawable.bg3_2}));
         setWidthP(bg3, 1F);
         setPositionPBL(bg3, 0, 0);
+        bg3.setY(bg3.getY() + 100);
         bg3.setSpeedX(yP(-0.005F));
         drawSprite.addSprite(0, bg3);
 
