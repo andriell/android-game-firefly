@@ -90,9 +90,8 @@ public class Level_1_Activity extends GameActivity {
         SpriteButtonClear fireButton = new SpriteButtonClear();
             fireButton.setUpListener(new InterfaceSpriteButtonUpListener() {
             @Override
-            public boolean onUp(MotionEvent e) {
-                Log.i("fireButton", e.toString());
-                drawSprite.addSprite(2, new PlayerShell(e.getX(), e.getY()));
+            public boolean onUp(MotionEvent e, float x, float y) {
+                drawSprite.addSprite(2, new PlayerShell(x, y));
                 return true;
             }
         });
@@ -132,13 +131,13 @@ public class Level_1_Activity extends GameActivity {
         }
 
         @Override
-        public boolean onDown(MotionEvent e) {
+        public boolean onDown(MotionEvent e, float x, float y) {
             accelerationY = -A;
             return true;
         }
 
         @Override
-        public boolean onUp(MotionEvent e) {
+        public boolean onUp(MotionEvent e, float x, float y) {
             accelerationY = A;
             return true;
         }

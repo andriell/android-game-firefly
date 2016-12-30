@@ -7,5 +7,5 @@ import android.view.MotionEvent;
  */
 
 public interface InterfaceSpriteTouchListener extends InterfaceSpritePositioned {
-    boolean onTouchEvent(MotionEvent e);
+    boolean onTouchEvent(MotionEvent e, float x, float y);
 }

@@ -153,13 +153,17 @@ public class DrawSprite extends DrawView {
     public boolean onTouchEvent(MotionEvent e) {
         Iterator<InterfaceSpriteTouchListener> iterator = spritesTouchListener.iterator();
         InterfaceSpriteTouchListener listener;
+        float x, y;
+        int index;
         while (iterator.hasNext()) {
             listener = iterator.next();
             // x1 <= x <= x2
             // y1 <= y <= y2
-            int index = e.getActionIndex();
-            if (listener.getX() <= e.getX(index) && e.getX(index) <= listener.getX() + listener.getWidth() && listener.getY() <= e.getY(index) && e.getY(index) <= listener.getY() + listener.getHeight()) {
-                listener.onTouchEvent(e);
+            index = e.getActionIndex();
+            x = e.getX(index);
+            y = e.getY(index);
+            if (listener.getX() <= x && x <= listener.getX() + listener.getWidth() && listener.getY() <= y && y <= listener.getY() + listener.getHeight()) {
+                listener.onTouchEvent(e, x, y);
             }
         }
         return true;

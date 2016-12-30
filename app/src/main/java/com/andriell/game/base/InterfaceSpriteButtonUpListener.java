@@ -7,5 +7,5 @@ import android.view.MotionEvent;
  */
 
 public interface InterfaceSpriteButtonUpListener {
-    public boolean onUp(MotionEvent e);
+    public boolean onUp(MotionEvent e, float x, float y);
 }

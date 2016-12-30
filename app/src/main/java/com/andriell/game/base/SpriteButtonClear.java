@@ -25,16 +25,16 @@ public class SpriteButtonClear extends SpriteResize implements InterfaceSpriteTo
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent e) {
+    public boolean onTouchEvent(MotionEvent e, float x, float y) {
         int index = e.getActionIndex();
         switch (e.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN:
-                return downListener == null || downListener.onDown(e);
+                return downListener == null || downListener.onDown(e, x, y);
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
-                return upListener == null || upListener.onUp(e);
+                return upListener == null || upListener.onUp(e, x, y);
         }
         return true;
     }

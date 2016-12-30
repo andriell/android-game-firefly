@@ -38,16 +38,16 @@ public class SpriteButtonBitmap extends SpriteBitmap implements InterfaceSpriteT
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent e) {
+    public boolean onTouchEvent(MotionEvent e, float x, float y) {
         if (e.getAction() == MotionEvent.ACTION_DOWN) {
             bitmap = bitmapPressed == null ? bitmapNormal : bitmapPressed;
             if (downListener != null) {
-                return downListener.onDown(e);
+                return downListener.onDown(e, x, y);
             }
             return true;
         } else if (e.getAction() == MotionEvent.ACTION_UP || e.getAction() == MotionEvent.ACTION_CANCEL) {
             if (upListener != null) {
-                return upListener.onUp(e);
+                return upListener.onUp(e, x, y);
             }
             return true;
         }

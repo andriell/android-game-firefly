@@ -7,5 +7,5 @@ import android.view.MotionEvent;
  */
 
 public interface InterfaceSpriteButtonDownListener {
-    public boolean onDown(MotionEvent e);
+    public boolean onDown(MotionEvent e, float x, float y);
 }

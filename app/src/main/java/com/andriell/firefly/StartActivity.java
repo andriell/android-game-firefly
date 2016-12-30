@@ -27,7 +27,7 @@ public class StartActivity extends GameActivity {
         setPositionCenter(spriteButtonBitmap);
         spriteButtonBitmap.setUpListener(new InterfaceSpriteButtonUpListener() {
             @Override
-            public boolean onUp(MotionEvent e) {
+            public boolean onUp(MotionEvent e, float x, float y) {
                 Intent intent = new Intent(StartActivity.this, Level_1_Activity.class);
                 startActivity(intent);
                 return true;
