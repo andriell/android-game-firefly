@@ -2,24 +2,28 @@ package com.andriell.firefly;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.andriell.game.base.Animation;
 import com.andriell.game.base.DrawSprite;
 import com.andriell.game.base.GameActivity;
 import com.andriell.game.base.InterfaceSpriteButtonDownListener;
 import com.andriell.game.base.InterfaceSpriteButtonUpListener;
+import com.andriell.game.base.InterfaceSpriteCollisionListener;
+import com.andriell.game.base.InterfaceSpriteCollisionTarget;
 import com.andriell.game.base.SpriteAnimation;
 import com.andriell.game.base.SpriteBitmap;
 import com.andriell.game.base.SpriteButtonClear;
 import com.andriell.game.base.SpriteRouteLissajous;
+import com.andriell.game.base.SpriteRunnerAnimation;
 import com.andriell.game.base.SpriteSheetBitmap;
 import com.andriell.game.base.SpriteSheetXBitmaps;
 
 /**
  * Created by Андрей on 25.12.2016.
  */
-
 public class Level_1_Activity extends GameActivity {
     DrawSprite drawSprite;
     Player player;
@@ -66,7 +70,7 @@ public class Level_1_Activity extends GameActivity {
         player = new Player();
         drawSprite.addSprite(2, player);
 
-        SpriteAnimation monster = new SpriteAnimation(createAnimationP(new int[]{R.drawable.monster1_1, R.drawable.monster1_2}, new int[]{150,150}));
+        Monster monster = new Monster();
         setPositionPTR(monster, 0.5F, 0.2F);
         SpriteRouteLissajous lissajousMonster = new SpriteRouteLissajous(1);
         lissajousMonster.setSpeed(1);
@@ -79,9 +83,22 @@ public class Level_1_Activity extends GameActivity {
         SpriteButtonClear jumpButton = new SpriteButtonClear();
         jumpButton.setDownListener(player);
         jumpButton.setUpListener(player);
-        setPositionPTL(jumpButton, 0F, 0F);
         setSizeP(jumpButton, 0.5F, 1F);
+        setPositionPTL(jumpButton, 0F, 0F);
         drawSprite.addSprite(3, jumpButton);
+
+        SpriteButtonClear fireButton = new SpriteButtonClear();
+            fireButton.setUpListener(new InterfaceSpriteButtonUpListener() {
+            @Override
+            public boolean onUp(MotionEvent e) {
+                Log.i("fireButton", e.toString());
+                drawSprite.addSprite(2, new PlayerShell(e.getX(), e.getY()));
+                return true;
+            }
+        });
+        setSizeP(fireButton, 0.5F, 1F);
+        setPositionPTR(fireButton, 0F, 0F);
+        drawSprite.addSprite(3, fireButton);
 
         return drawSprite;
     }
@@ -124,6 +141,56 @@ public class Level_1_Activity extends GameActivity {
         public boolean onUp(MotionEvent e) {
             accelerationY = A;
             return true;
+        }
+    }
+
+    class Monster extends SpriteAnimation implements InterfaceSpriteCollisionListener {
+        Animation animation;
+        public Monster() {
+            if (animation == null) {
+                animation = createAnimationP(new int[]{R.drawable.monster1_1, R.drawable.monster1_2}, new int[]{150,150});
+            }
+            setAnimation(animation);
+        }
+
+        @Override
+        public boolean onCollision(InterfaceSpriteCollisionTarget sprite) {
+            if (sprite instanceof PlayerShell) {
+                PlayerShell shell = (PlayerShell) sprite;
+                shell.destroy();
+            }
+            return false;
+        }
+    }
+
+    class PlayerShell extends SpriteRunnerAnimation implements InterfaceSpriteCollisionTarget {
+        Animation animation1;
+        Animation animation2;
+
+        public PlayerShell(float x2, float y2) {
+            if (animation1 == null) {
+                animation1 = createAnimationP(new int[]{R.drawable.shell3_1}, new int[]{100});
+                animation2 = createAnimationP(new int[]{R.drawable.shell3_2, R.drawable.shell3_3, R.drawable.shell3_4, 0}, new int[]{100, 100, 100, 100});
+            }
+            setAnimation(animation1);
+
+            x = player.getCenterX() + player.getWidth();
+            y = player.getCenterY();
+            setSpeed(this, x2, y2, 10F);
+        }
+
+        public void destroy() {
+            setAnimation(animation2);
+            setSpeedX(0);
+            setSpeedY(0);
+        }
+
+        @Override
+        public boolean onDraw(Canvas c) {
+            if (getAnimation() == animation2 && animation2.getBitmap() == null) {
+                return false;
+            }
+            return super.onDraw(c);
         }
     }
 }

@@ -135,7 +135,11 @@ public abstract class GameActivity extends Activity {
     public Animation createAnimationP(int[] id, int[] timeMap, float width, float height, float speed) {
         Bitmap[] bitmaps = new Bitmap[id.length];
         for (int i = 0; i < id.length; i++) {
-            bitmaps[i] = createBitmapP(id[i], width, height);
+            if (id[i] == 0) {
+                bitmaps[i] = null;
+            } else {
+                bitmaps[i] = createBitmapP(id[i], width, height);
+            }
         }
         return new Animation(bitmaps, timeMap, speed);
     }
