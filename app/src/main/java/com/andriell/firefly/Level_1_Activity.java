@@ -2,6 +2,7 @@ package com.andriell.firefly;
 
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -99,6 +100,10 @@ public class Level_1_Activity extends GameActivity {
         setPositionPTR(fireButton, 0F, 0F);
         drawSprite.addSprite(3, fireButton);
 
+        MediaPlayer player1 = MediaPlayer.create(this, R.raw.level1);
+        player1.setLooping(true);
+        player1.start();
+
         return drawSprite;
     }
 
@@ -113,7 +118,6 @@ public class Level_1_Activity extends GameActivity {
             x = getAnimation().getWidth();
             maxY = displaySize.y - getAnimation().getHeight();
             y = maxY / 2;
-
         }
 
         @Override
@@ -173,8 +177,8 @@ public class Level_1_Activity extends GameActivity {
             }
             setAnimation(animation1);
 
-            x = player.getCenterX() + player.getWidth();
-            y = player.getCenterY();
+            x = player.getX() + player.getWidth() * 3 / 4;
+            y = player.getCenterY() + player.getHeight() * 3 / 4;
             setSpeed(this, x2, y2, 10F);
         }
 
